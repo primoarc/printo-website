@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0A0A0F"/>
+  <!-- Glow -->
+  <radialGradient id="glow" cx="50%" cy="45%" r="50%">
+    <stop offset="0%" stop-color="#6C47FF" stop-opacity="0.15"/>
+    <stop offset="100%" stop-color="#0A0A0F" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Wordmark: "Print" + "o" outline + círculo sobre la "i" -->
+  <!-- "Print" -->
+  <text x="230" y="340" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="180" letter-spacing="-4" fill="#7B6FE8">Print</text>
+  <!-- "o" outline -->
+  <text x="850" y="340" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="180" letter-spacing="-4" fill="none" stroke="#DDDAF5" stroke-width="12">o</text>
+  <!-- Círculo flotante sobre la "i" -->
+  <circle cx="590" cy="135" r="22" fill="#7B6FE8"/>
+
+  <!-- Tagline -->
+  <text x="600" y="410" font-family="'Helvetica Neue', Arial, sans-serif" font-size="28" fill="#8888A8" text-anchor="middle" font-weight="400">Imprime desde WhatsApp · Desde Q2/página · Guatemala</text>
+
+  <!-- URL -->
+  <text x="600" y="510" font-family="'Helvetica Neue', Arial, sans-serif" font-size="22" fill="rgba(123,111,232,0.7)" text-anchor="middle" font-weight="600" letter-spacing="1">getprinto.com</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Fondo redondeado -->
+  <rect width="32" height="32" rx="8" fill="#1A1830"/>
+  <!-- "P" morado -->
+  <text x="4" y="24" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="22" fill="#7B6FE8">P</text>
+  <!-- Círculo flotante (punto de la "i", usado como marca) -->
+  <circle cx="24" cy="8" r="4" fill="#7B6FE8"/>
+  <!-- "o" outline -->
+  <text x="16" y="24" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="16" fill="none" stroke="#DDDAF5" stroke-width="2">o</text>
+</svg>

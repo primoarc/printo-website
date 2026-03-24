@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <!-- "Print" en morado -->
+  <text
+    x="0"
+    y="48"
+    font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif"
+    font-weight="700"
+    font-size="52"
+    letter-spacing="-1"
+    fill="#7B6FE8"
+  >Print</text>
+
+  <!-- "o" final en gris claro, outline -->
+  <text
+    x="137"
+    y="48"
+    font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif"
+    font-weight="700"
+    font-size="52"
+    letter-spacing="-1"
+    fill="none"
+    stroke="#E0DCF0"
+    stroke-width="4"
+  >o</text>
+
+  <!-- Círculo flotante sobre la "i" -->
+  <circle cx="82" cy="4" r="5.5" fill="#7B6FE8"/>
+</svg>

@@ -4,7 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Printo — Imprime desde WhatsApp</title>
-  <meta name="description" content="Envía tu documento por WhatsApp, escanea el QR de la impresora más cercana y listo. Sin apps, sin filas, sin complicaciones." />
+  <meta name="description" content="Envía tu PDF por WhatsApp, paga con tu saldo Printo y escanea el QR de la impresora más cercana. Sin apps, sin filas. Desde Q2 la página." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Open Graph / WhatsApp / redes sociales -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://getprinto.com/" />
+  <meta property="og:title" content="Printo — Imprime desde WhatsApp" />
+  <meta property="og:description" content="Manda tu PDF por WhatsApp, elige opciones y escanea el QR. Sin apps, sin filas. Desde Q2 la página en Guatemala." />
+  <meta property="og:image" content="https://getprinto.com/og-image.svg" />
+  <meta property="og:locale" content="es_GT" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Printo — Imprime desde WhatsApp" />
+  <meta name="twitter:description" content="Manda tu PDF por WhatsApp, elige opciones y escanea el QR. Sin apps, sin filas. Desde Q2 la página en Guatemala." />
+  <meta name="twitter:image" content="https://getprinto.com/og-image.svg" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -13,6 +31,7 @@
 
     :root {
       --purple: #6C47FF;
+      --purple-light: #8B6FFF;
       --cyan: #00E5FF;
       --bg: #0A0A0F;
       --bg2: #12121A;
@@ -20,6 +39,7 @@
       --text: #FFFFFF;
       --muted: #8888A8;
       --border: rgba(108, 71, 255, 0.2);
+      --green: #25D366;
     }
 
     html { scroll-behavior: smooth; }
@@ -40,8 +60,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.25rem 2rem;
-      background: rgba(10, 10, 15, 0.8);
+      padding: 1rem 2rem;
+      background: rgba(10, 10, 15, 0.85);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
@@ -49,29 +69,17 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      font-weight: 700;
-      font-size: 1.25rem;
       text-decoration: none;
-      color: var(--text);
+      line-height: 1;
     }
 
-    .logo-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--purple);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .logo-icon svg { width: 18px; height: 18px; }
+    .logo svg { display: block; }
 
     nav .cta-small {
-      background: var(--purple);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--green);
       color: #fff;
       border: none;
       padding: 0.5rem 1.25rem;
@@ -83,7 +91,7 @@
       text-decoration: none;
       transition: opacity 0.2s;
     }
-    nav .cta-small:hover { opacity: 0.85; }
+    nav .cta-small:hover { opacity: 0.88; }
 
     /* HERO */
     .hero {
@@ -103,9 +111,9 @@
       top: 20%;
       left: 50%;
       transform: translateX(-50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(108,71,255,0.15) 0%, transparent 70%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(108,71,255,0.12) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -120,21 +128,20 @@
       border-radius: 100px;
       font-size: 0.8rem;
       font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
       margin-bottom: 1.75rem;
     }
 
     .badge-dot {
       width: 6px; height: 6px;
-      background: var(--cyan);
+      background: var(--green);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.4); }
+      50% { opacity: 0.5; transform: scale(1.5); }
     }
 
     h1 {
@@ -143,52 +150,76 @@
       line-height: 1.1;
       letter-spacing: -0.02em;
       max-width: 800px;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
-    h1 span {
-      background: linear-gradient(135deg, var(--purple), var(--cyan));
+    h1 .highlight {
+      background: linear-gradient(135deg, var(--purple-light), var(--cyan));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
     .hero-sub {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--muted);
-      max-width: 520px;
-      margin-bottom: 2.5rem;
+      max-width: 480px;
+      margin-bottom: 1rem;
       line-height: 1.7;
     }
+
+    /* Price pill under subheadline */
+    .price-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.875rem;
+      color: var(--text);
+      margin-bottom: 2.25rem;
+      font-weight: 500;
+    }
+
+    .price-pill .sep {
+      width: 1px;
+      height: 14px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .price-pill strong { color: var(--cyan); font-weight: 700; }
 
     .hero-actions {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 4rem;
+      margin-bottom: 3.5rem;
     }
 
     .btn-primary {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: var(--purple);
+      background: var(--green);
       color: #fff;
-      padding: 0.9rem 2rem;
+      padding: 1rem 2rem;
       border-radius: 12px;
       font-family: inherit;
-      font-weight: 600;
-      font-size: 1rem;
+      font-weight: 700;
+      font-size: 1.05rem;
       text-decoration: none;
       border: none;
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 0 30px rgba(108, 71, 255, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+      box-shadow: 0 0 30px rgba(37, 211, 102, 0.35);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(108, 71, 255, 0.6);
+      box-shadow: 0 0 45px rgba(37, 211, 102, 0.5);
+      opacity: 0.92;
     }
 
     .btn-secondary {
@@ -197,11 +228,11 @@
       gap: 0.5rem;
       background: transparent;
       color: var(--text);
-      padding: 0.9rem 2rem;
+      padding: 1rem 2rem;
       border-radius: 12px;
       font-family: inherit;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 1.05rem;
       text-decoration: none;
       border: 1px solid var(--border);
       cursor: pointer;
@@ -224,11 +255,11 @@
       border: 2px solid var(--border);
       border-radius: 32px;
       padding: 1rem;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(108,71,255,0.1);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(108,71,255,0.08);
     }
 
     .phone-screen {
-      background: #075E54;
+      background: #0B1E1B;
       border-radius: 22px;
       padding: 1rem;
       min-height: 380px;
@@ -239,7 +270,7 @@
       align-items: center;
       gap: 0.5rem;
       padding-bottom: 0.75rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       margin-bottom: 1rem;
     }
 
@@ -255,42 +286,42 @@
     }
 
     .wa-name { font-size: 0.85rem; font-weight: 600; }
-    .wa-status { font-size: 0.7rem; color: rgba(255,255,255,0.6); }
+    .wa-status { font-size: 0.7rem; color: var(--green); }
 
     .wa-msg {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.08);
       border-radius: 12px 12px 12px 4px;
       padding: 0.6rem 0.8rem;
       font-size: 0.78rem;
       margin-bottom: 0.5rem;
-      max-width: 85%;
+      max-width: 87%;
       line-height: 1.5;
     }
 
     .wa-msg.sent {
-      background: #128C7E;
+      background: #1F4F3A;
       margin-left: auto;
       border-radius: 12px 12px 4px 12px;
     }
 
     .wa-msg .time {
       font-size: 0.65rem;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.4);
       text-align: right;
       margin-top: 0.25rem;
     }
 
-    /* HOW IT WORKS */
+    /* SECTIONS */
     section { padding: 5rem 1.5rem; }
 
     .section-label {
       text-align: center;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--purple);
-      margin-bottom: 1rem;
+      color: var(--purple-light);
+      margin-bottom: 0.75rem;
     }
 
     h2 {
@@ -298,7 +329,7 @@
       font-size: clamp(1.75rem, 4vw, 2.75rem);
       font-weight: 700;
       letter-spacing: -0.02em;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
 
     .section-sub {
@@ -309,11 +340,23 @@
       margin: 0 auto 3.5rem;
     }
 
+    /* Step icons */
+    .step-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--purple-light);
+      stroke-width: 1.75;
+      fill: none;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* STEPS — exactly 3 */
     .steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      max-width: 960px;
+      max-width: 860px;
       margin: 0 auto;
     }
 
@@ -332,7 +375,7 @@
     }
 
     .step-num {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--cyan);
       letter-spacing: 0.1em;
@@ -351,44 +394,55 @@
     }
 
     .step p {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       color: var(--muted);
       line-height: 1.6;
     }
 
     /* LOCATIONS */
-    .locations {
-      background: var(--bg2);
+    .locations { background: var(--bg2); }
+
+    .locations-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
     }
 
     .locations-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
-      max-width: 800px;
-      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
     }
 
-    .location-card {
+    .location-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       background: var(--bg3);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem 1rem;
-      text-align: center;
-      transition: border-color 0.2s;
+      border-radius: 100px;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: border-color 0.2s, color 0.2s;
     }
+    .location-chip:hover { border-color: var(--purple); color: var(--text); }
 
-    .location-card:hover { border-color: var(--purple); }
-
-    .location-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
-    .location-card p { font-size: 0.9rem; font-weight: 500; color: var(--muted); }
+    .location-cta-note {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
 
     /* PRICING */
     .pricing-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
-      max-width: 860px;
+      max-width: 360px;
       margin: 0 auto;
     }
 
@@ -411,9 +465,32 @@
       background: rgba(108, 71, 255, 0.08);
     }
 
-    .price-type { font-size: 0.8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
-    .price-amount { font-size: 2rem; font-weight: 700; color: var(--text); }
-    .price-unit { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+    .price-type {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .price-amount {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+    .price-unit {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    .pricing-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.875rem;
+      margin-top: 1.5rem;
+    }
 
     /* FAQ */
     .faq-list {
@@ -441,13 +518,18 @@
       justify-content: space-between;
       align-items: center;
       font-size: 0.95rem;
+      user-select: none;
     }
+
+    summary::-webkit-details-marker { display: none; }
 
     summary::after {
       content: '+';
       font-size: 1.25rem;
-      color: var(--purple);
+      color: var(--purple-light);
       transition: transform 0.2s;
+      flex-shrink: 0;
+      margin-left: 1rem;
     }
 
     details[open] summary::after {
@@ -473,13 +555,21 @@
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 500px; height: 300px;
-      background: radial-gradient(ellipse, rgba(108,71,255,0.12) 0%, transparent 70%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(108,71,255,0.1) 0%, transparent 70%);
       pointer-events: none;
     }
 
-    .cta-section h2 { margin-bottom: 1rem; }
-    .cta-section p { color: var(--muted); margin-bottom: 2rem; font-size: 1.05rem; }
+    .cta-section h2 { margin-bottom: 0.75rem; }
+    .cta-section p { color: var(--muted); margin-bottom: 2rem; font-size: 1.05rem; max-width: 400px; margin-left: auto; margin-right: auto; }
+    .gradient-text {
+      background: linear-gradient(135deg, var(--purple-light), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cta-section .btn-primary { display: inline-flex; font-size: 1.1rem; padding: 1.1rem 2.25rem; }
 
     /* FOOTER */
     footer {
@@ -505,10 +595,19 @@
 
     /* RESPONSIVE */
     @media (max-width: 640px) {
-      nav { padding: 1rem; }
-      .hero { padding-top: 6rem; }
-      .hero-actions { flex-direction: column; align-items: center; }
+      nav { padding: 0.875rem 1rem; }
+      .hero { padding-top: 5.5rem; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
       .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+      .steps {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+      .pricing-cards {
+        grid-template-columns: 1fr 1fr;
+        max-width: 340px;
+      }
+      .footer-inner { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
@@ -517,40 +616,48 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="logo">
-    <div class="logo-icon">
-      <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="3" y="2" width="9" height="11" rx="1.5" fill="white" opacity="0.9"/>
-        <rect x="5" y="13" width="9" height="3" rx="1" fill="white" opacity="0.5"/>
-        <rect x="5" y="5" width="5" height="1.2" rx="0.6" fill="#6C47FF"/>
-        <rect x="5" y="7.5" width="7" height="1.2" rx="0.6" fill="#6C47FF"/>
-        <rect x="5" y="10" width="4" height="1.2" rx="0.6" fill="#6C47FF"/>
-      </svg>
-    </div>
-    Printo
+    <!-- Wordmark Printo: "Print" morado + "o" outline gris + círculo flotante sobre la "i" -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 44" height="28" aria-label="Printo">
+      <!-- "Print" -->
+      <text x="0" y="36" font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="40" letter-spacing="-1" fill="#7B6FE8">Print</text>
+      <!-- "o" outline -->
+      <text x="101" y="36" font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="40" letter-spacing="-1" fill="none" stroke="#DDDAF5" stroke-width="3.5">o</text>
+      <!-- Círculo flotante sobre la "i" -->
+      <circle cx="60" cy="3" r="4.5" fill="#7B6FE8"/>
+    </svg>
   </a>
-  <a href="https://wa.me/50256373592" class="cta-small">Empezar gratis</a>
+  <a href="https://wa.me/50256373592?text=Hola%2C+quiero+imprimir" class="cta-small">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Imprimir ahora
+  </a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="badge">
     <span class="badge-dot"></span>
-    Disponible en Guatemala
+    🇬🇹 Disponible en Guatemala
   </div>
 
-  <h1>Imprime desde<br /><span>WhatsApp</span><br />en segundos</h1>
+  <h1>Imprime desde<br /><span class="highlight">WhatsApp</span><br />en minutos</h1>
 
   <p class="hero-sub">
-    Manda tu documento, elige opciones, escanea el QR de la impresora más cercana. Sin apps, sin cuentas, sin fila.
+    Manda tu PDF por WhatsApp, elige opciones y escanea el QR de la impresora más cercana. Sin apps, sin cuentas, sin fila.
   </p>
 
+  <div class="price-pill">
+    <span>B&amp;N <strong>Q2</strong>/página</span>
+    <span class="sep"></span>
+    <span>Color <strong>Q5</strong>/página</span>
+  </div>
+
   <div class="hero-actions">
-    <a href="https://wa.me/50256373592?text=Hola" class="btn-primary">
+    <a href="https://wa.me/50256373592?text=Hola%2C+quiero+imprimir" class="btn-primary">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Probar ahora
+      Imprimir por WhatsApp
     </a>
     <a href="#como-funciona" class="btn-secondary">
-      Ver cómo funciona
+      Ver cómo funciona ↓
     </a>
   </div>
 
@@ -566,27 +673,25 @@
           </div>
         </div>
         <div class="wa-msg">
-          👋 Hola! Mándame tu PDF y te digo cuánto cuesta imprimirlo.
+          👋 ¡Hola! Mándame tu PDF y te digo cuánto cuesta.
           <div class="time">9:01</div>
         </div>
         <div class="wa-msg sent">
-          [documento.pdf]
+          [tarea.pdf]
           <div class="time">9:02 ✓✓</div>
         </div>
         <div class="wa-msg">
-          📄 Listo! Tu archivo tiene <b>3 páginas</b>. ¿Cómo lo quieres?<br/><br/>
-          1️⃣ Carta B/N — Q1.50<br/>
-          2️⃣ Carta Color — Q4.50<br/>
-          3️⃣ Legal B/N — Q2.25<br/>
-          4️⃣ Legal Color — Q6.00
+          📄 Tu archivo tiene <b>3 páginas</b>.<br/><br/>
+          1️⃣ Blanco &amp; Negro — Q6.00<br/>
+          2️⃣ Color — Q15.00
           <div class="time">9:02</div>
         </div>
         <div class="wa-msg sent">
           1
-          <div class="time">9:03 ✓✓</div>
+          <div class="time">9:02 ✓✓</div>
         </div>
         <div class="wa-msg">
-          ✅ Perfecto! Escanea el QR de la impresora para imprimir.
+          ✅ ¡Listo! Escanea el QR de la impresora para imprimir.
           <div class="time">9:03</div>
         </div>
       </div>
@@ -597,33 +702,46 @@
 <!-- COMO FUNCIONA -->
 <section id="como-funciona">
   <p class="section-label">Cómo funciona</p>
-  <h2>Imprime en 3 pasos</h2>
-  <p class="section-sub">Sin descargar apps, sin registrarte, sin complicaciones.</p>
+  <h2>3 pasos y listo</h2>
+  <p class="section-sub">Sin descargar apps. Sin registrarte. Solo WhatsApp.</p>
 
   <div class="steps">
     <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-icon">📎</div>
-      <h3>Manda tu archivo</h3>
-      <p>Envía tu PDF directamente a Printo por WhatsApp. Elige tamaño y color.</p>
+      <div class="step-num">PASO 01</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="14 2 14 8 20 8" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="9" y1="13" x2="15" y2="13" stroke-linecap="round"/>
+          <line x1="9" y1="17" x2="13" y2="17" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>Manda tu PDF</h3>
+      <p>Envía tu archivo a Printo por WhatsApp. El bot te confirma las páginas y te da el costo al instante.</p>
     </div>
     <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-icon">💳</div>
-      <h3>Paga al instante</h3>
-      <p>Saldo en tu wallet de Printo. Recarga cuando quieras, úsalo cuando lo necesites.</p>
+      <div class="step-num">PASO 02</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="5" width="20" height="14" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="2" y1="10" x2="22" y2="10" stroke-linecap="round"/>
+          <line x1="6" y1="15" x2="10" y2="15" rx="1" stroke-linecap="round" stroke-width="2"/>
+        </svg>
+      </div>
+      <h3>Confirma y paga</h3>
+      <p>Elige B&amp;N o color, descuenta de tu saldo Printo. Si es tu primera vez, el bot te guía para recargar en segundos.</p>
     </div>
     <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-icon">📲</div>
-      <h3>Escanea y listo</h3>
-      <p>Escanea el QR de cualquier impresora Printo. Tu documento sale en segundos.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">04</div>
-      <div class="step-icon">🖨️</div>
-      <h3>Recoge tu impresión</h3>
-      <p>La impresora confirma e imprime. Te notificamos por WhatsApp cuando esté listo.</p>
+      <div class="step-num">PASO 03</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="11" width="18" height="11" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <h3>Escanea y recoge</h3>
+      <p>Ve a la impresora Printo más cercana, escanea el QR y tu documento sale en segundos.</p>
     </div>
   </div>
 </section>
@@ -631,104 +749,84 @@
 <!-- UBICACIONES -->
 <section class="locations">
   <p class="section-label">Dónde encontrarnos</p>
-  <h2>Impresoras donde las necesitas</h2>
-  <p class="section-sub">Estamos expandiendo a los lugares donde más imprimes.</p>
+  <h2>Cerca de donde estás</h2>
 
-  <div class="locations-grid">
-    <div class="location-card">
-      <div class="icon">🎓</div>
-      <p>Universidades</p>
+  <div class="locations-inner">
+    <div class="locations-grid">
+      <span class="location-chip">🎓 Universidades</span>
+      <span class="location-chip">☕ Cafés</span>
+      <span class="location-chip">⛽ Gasolineras</span>
+      <span class="location-chip">🏬 Centros comerciales</span>
+      <span class="location-chip">🏢 Oficinas</span>
     </div>
-    <div class="location-card">
-      <div class="icon">☕</div>
-      <p>Cafés</p>
-    </div>
-    <div class="location-card">
-      <div class="icon">⛽</div>
-      <p>Gasolineras</p>
-    </div>
-    <div class="location-card">
-      <div class="icon">🏬</div>
-      <p>Centros comerciales</p>
-    </div>
-    <div class="location-card">
-      <div class="icon">🏢</div>
-      <p>Oficinas</p>
-    </div>
+    <p class="location-cta-note">¿No sabes dónde hay una? Pregúntale al bot — te dice la más cercana.</p>
+    <a href="https://wa.me/50256373592?text=%C2%BFD%C3%B3nde+est%C3%A1+la+impresora+m%C3%A1s+cercana%3F" class="btn-secondary" style="display: inline-flex; margin: 0 auto;">
+      Encontrar impresora →
+    </a>
   </div>
 </section>
 
 <!-- PRECIOS -->
 <section id="precios">
   <p class="section-label">Precios</p>
-  <h2>Simple y transparente</h2>
-  <p class="section-sub">Pagas por página, nada más.</p>
+  <h2>Claro y sin sorpresas</h2>
+  <p class="section-sub">Pagas exactamente por lo que imprimes.</p>
 
   <div class="pricing-cards">
     <div class="price-card featured">
-      <div class="price-type">Carta B/N</div>
-      <div class="price-amount">Q0.50</div>
+      <div class="price-type">Blanco &amp; Negro</div>
+      <div class="price-amount">Q2</div>
       <div class="price-unit">por página</div>
     </div>
     <div class="price-card">
-      <div class="price-type">Carta Color</div>
-      <div class="price-amount">Q1.50</div>
-      <div class="price-unit">por página</div>
-    </div>
-    <div class="price-card">
-      <div class="price-type">Legal B/N</div>
-      <div class="price-amount">Q0.75</div>
-      <div class="price-unit">por página</div>
-    </div>
-    <div class="price-card">
-      <div class="price-type">Legal Color</div>
-      <div class="price-amount">Q2.00</div>
+      <div class="price-type">Color</div>
+      <div class="price-amount">Q5</div>
       <div class="price-unit">por página</div>
     </div>
   </div>
+  <p class="pricing-note">Sin costos de envío, sin suscripción, sin mínimo de páginas.</p>
 </section>
 
 <!-- FAQ -->
 <section id="faq" style="background: var(--bg2);">
   <p class="section-label">Preguntas frecuentes</p>
-  <h2>Todo lo que necesitas saber</h2>
-  <p class="section-sub" style="margin-bottom: 2.5rem;"></p>
+  <h2>¿Tienes dudas?</h2>
 
   <div class="faq-list">
     <details>
       <summary>¿Necesito descargar una app?</summary>
-      <p>No. Todo funciona por WhatsApp, que ya tienes instalado. No necesitas crear ninguna cuenta ni descargar nada adicional.</p>
+      <p>No. Todo funciona por WhatsApp, que ya tienes en tu celular. No hay nada que instalar ni cuenta que crear.</p>
     </details>
     <details>
-      <summary>¿Qué formatos acepta Printo?</summary>
+      <summary>¿Qué formatos puedo enviar?</summary>
       <p>Por ahora aceptamos PDF. Próximamente Word, Excel y fotos.</p>
     </details>
     <details>
       <summary>¿Cómo recargo mi saldo?</summary>
-      <p>Puedes recargar tu wallet de Printo directamente desde WhatsApp con tarjeta de crédito/débito o transferencia.</p>
+      <p>Directo desde el chat de WhatsApp — con tarjeta de crédito/débito o transferencia bancaria. Sin salir de la app.</p>
     </details>
     <details>
       <summary>¿Mis documentos son privados?</summary>
-      <p>Sí. Tus archivos se eliminan automáticamente de nuestros servidores tan pronto como se imprimen. Nunca almacenamos tu contenido.</p>
+      <p>Sí. Tu archivo se borra automáticamente de nuestros servidores en cuanto se imprime. Nunca guardamos tu contenido.</p>
     </details>
     <details>
       <summary>¿Qué pasa si la impresora falla?</summary>
-      <p>Tu trabajo queda en cola y puedes escanearlo en otra impresora Printo cercana. Si hay un problema, te devolvemos el saldo automáticamente.</p>
+      <p>Tu trabajo queda guardado y puedes escanearlo en otra impresora Printo cercana. Si hay un problema técnico, te devolvemos el saldo automáticamente.</p>
     </details>
     <details>
-      <summary>¿Dónde encuentro una impresora Printo?</summary>
-      <p>Estamos en universidades, cafés, gasolineras y centros comerciales de Guatemala. Pregúntale a Printo por WhatsApp y te decimos la más cercana.</p>
+      <summary>¿Dónde hay impresoras Printo?</summary>
+      <p>Estamos en universidades, cafés, gasolineras y centros comerciales de Guatemala. Escríbele al bot y te dice la más cercana a donde estás.</p>
     </details>
   </div>
 </section>
 
 <!-- CTA FINAL -->
 <section class="cta-section">
-  <h2>¿Listo para imprimir<br /><span style="background: linear-gradient(135deg, #6C47FF, #00E5FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">sin complicaciones?</span></h2>
-  <p>Únete a miles de personas que ya imprimen desde WhatsApp.</p>
-  <a href="https://wa.me/50256373592?text=Hola" class="btn-primary" style="display: inline-flex;">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    Empezar gratis por WhatsApp
+  <h2>¿Listo para imprimir<br /><span class="gradient-text">sin complicaciones?</span></h2>
+  <p>Es gratis empezar. Solo necesitas WhatsApp y tu documento.</p>
+  <a href="https://wa.me/50256373592?text=Hola%2C+quiero+imprimir" class="btn-primary">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Imprimir por WhatsApp
   </a>
 </section>
 
