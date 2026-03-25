@@ -1,0 +1,16 @@
+# Printo
+
+> Impresion de documentos desde WhatsApp en Guatemala. Sin apps, sin colas.
+
+## Como funciona
+- El usuario envia su PDF por WhatsApp al numero de Printo
+- El bot confirma paginas y precio al instante
+- El usuario paga desde el chat y escanea el QR de la impresora mas cercana
+- Blanco y Negro: Q2 por pagina. Color: Q5 por pagina
+
+## Ubicaciones
+Kioscos en universidades, cafes, gasolineras, centros comerciales y oficinas en Guatemala.
+
+## Contacto
+- WhatsApp: https://wa.me/50256373592
+- Web: https://getprinto.com
