@@ -7,14 +7,12 @@
   <meta name="description" content="Envía tu PDF por WhatsApp, paga con tu saldo Printo y escanea el QR de la impresora más cercana. Sin apps, sin filas. Desde Q2 la página." />
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://getprinto.com/" />
   <meta property="og:title" content="Printo — Imprime desde WhatsApp" />
   <meta property="og:description" content="Manda tu PDF por WhatsApp, elige opciones y escanea el QR. Sin apps, sin filas. Desde Q2 la página en Guatemala." />
   <meta property="og:image" content="https://getprinto.com/og-image.svg" />
   <meta property="og:locale" content="es_GT" />
-
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Printo — Imprime desde WhatsApp" />
   <meta name="twitter:description" content="Manda tu PDF por WhatsApp, elige opciones y escanea el QR. Sin apps, sin filas. Desde Q2 la página en Guatemala." />
@@ -22,827 +20,603 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --indigo:       #5D6BFF;
-      --indigo-light: #7E8EFF;
-      --indigo-dim:   rgba(93, 107, 255, 0.14);
-      --indigo-glow:  rgba(93, 107, 255, 0.22);
-      --green:        #25D366;
-      --green-dim:    rgba(37, 211, 102, 0.18);
-      --green-glow:   rgba(37, 211, 102, 0.28);
-      --bg:           #07070C;
-      --bg1:          #0C0C14;
-      --bg2:          #111119;
-      --bg3:          #17172200;
-      --surface:      rgba(255,255,255,0.035);
-      --surface-hov:  rgba(255,255,255,0.06);
-      --text:         #EDEEF3;
-      --muted:        #72728A;
-      --subtle:       #484860;
-      --border:       rgba(255,255,255,0.06);
-      --border-mid:   rgba(255,255,255,0.1);
-      --border-ind:   rgba(93,107,255,0.35);
+      --black:    #080808;
+      --black2:   #0F0F0F;
+      --white:    #F5F5F2;
+      --purple:   #6B2FFF;
+      --purple-l: #9B6FFF;
+      --purple-d: rgba(107, 47, 255, 0.15);
+      --green:    #25D366;
+      --green-g:  rgba(37, 211, 102, 0.3);
+      --t-dark:   #EEECEA;
+      --m-dark:   rgba(238, 236, 234, 0.42);
+      --t-light:  #111110;
+      --m-light:  rgba(17, 17, 16, 0.48);
+      --bd:       rgba(255,255,255,0.07);
+      --bl:       rgba(0,0,0,0.07);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      background: var(--black);
+      color: var(--t-dark);
       overflow-x: hidden;
-      position: relative;
     }
 
-    /* ── GRID BACKGROUND ────────────────── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 44px 44px;
-      pointer-events: none;
-      z-index: 0;
-      mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, black 30%, transparent 100%);
+    .disp {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.92;
+      letter-spacing: -0.01em;
     }
 
-    /* ── NOISE LAYER ────────────────────── */
-    .noise {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      opacity: 0.35;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 300px 300px;
-    }
-
-    /* All content above noise */
-    nav, main, footer, section { position: relative; z-index: 2; }
-
-    /* ── TYPOGRAPHY ─────────────────────── */
-    h1, h2, h3 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      letter-spacing: -0.03em;
-    }
-
-    .mono {
-      font-family: 'DM Mono', monospace;
-    }
-
-    /* ── NAV ────────────────────────────── */
+    /* ── NAV ─────────────────────────────── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.9rem 2rem;
-      background: rgba(7, 7, 12, 0.75);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      background: rgba(8, 8, 8, 0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--bd);
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-    }
-    .logo svg { display: block; }
+    .logo { display:flex; align-items:center; text-decoration:none; }
+    .logo svg { display:block; }
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      list-style: none;
+    .nav-mid {
+      display: flex; gap: 0.25rem; list-style: none;
     }
-    .nav-links a {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--muted);
-      text-decoration: none;
-      padding: 0.35rem 0.75rem;
-      border-radius: 6px;
-      transition: color 0.15s, background 0.15s;
+    .nav-mid a {
+      font-size: 0.83rem; font-weight: 500;
+      color: var(--m-dark); text-decoration: none;
+      padding: 0.35rem 0.7rem; border-radius: 6px;
+      transition: color .15s, background .15s;
     }
-    .nav-links a:hover { color: var(--text); background: var(--surface); }
+    .nav-mid a:hover { color: var(--t-dark); background: rgba(255,255,255,.06); }
 
     .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: var(--green);
-      color: #fff;
-      padding: 0.45rem 1.1rem;
-      border-radius: 8px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 600;
-      font-size: 0.85rem;
-      text-decoration: none;
-      transition: opacity 0.15s, box-shadow 0.15s;
-      box-shadow: 0 0 0 0 var(--green-glow);
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: var(--green); color: #fff;
+      padding: .45rem 1.1rem; border-radius: 8px;
+      font-weight: 600; font-size: .85rem; text-decoration: none;
+      transition: opacity .15s, box-shadow .15s;
+      box-shadow: 0 0 0 0 var(--green-g);
     }
-    .nav-cta:hover {
-      opacity: 0.9;
-      box-shadow: 0 0 16px var(--green-glow);
-    }
+    .nav-cta:hover { opacity: .9; box-shadow: 0 0 20px var(--green-g); }
 
-    /* ── HERO ───────────────────────────── */
+    /* ── HERO ────────────────────────────── */
     .hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr auto;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 9rem 1.5rem 5rem;
+      gap: 4rem;
+      padding: 9rem 5vw 5rem;
       position: relative;
       overflow: hidden;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
-    .hero-mesh {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse 70% 55% at 50% 15%, rgba(93,107,255,0.11) 0%, transparent 65%),
-        radial-gradient(ellipse 45% 50% at 15% 70%, rgba(93,107,255,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 45% 45% at 85% 60%, rgba(37,211,102,0.05) 0%, transparent 60%);
-      animation: meshPulse 12s ease-in-out infinite alternate;
-    }
-    @keyframes meshPulse {
-      from { opacity: 0.85; }
-      to   { opacity: 1; }
-    }
-
-    /* Page-load stagger */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--surface);
-      border: 1px solid var(--border-mid);
-      color: var(--muted);
-      padding: 0.3rem 0.85rem 0.3rem 0.6rem;
-      border-radius: 100px;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      margin-bottom: 2rem;
-      animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both 0.05s;
-    }
-    .badge-dot {
-      width: 6px; height: 6px;
-      background: var(--green);
-      border-radius: 50%;
-      animation: pulse 2.5s ease-in-out infinite;
-      flex-shrink: 0;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--green-dim); }
-      50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(37,211,102,0); }
-    }
-
-    h1 {
-      font-size: clamp(2.8rem, 7vw, 5.2rem);
-      font-weight: 800;
-      line-height: 1.0;
-      letter-spacing: -0.04em;
-      max-width: 820px;
-      margin-bottom: 1.4rem;
-      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both 0.12s;
-    }
-
-    .h1-line { display: block; }
-
-    .h1-accent {
-      background: linear-gradient(135deg, #7E8EFF 10%, #25D366 90%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-sub {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 440px;
-      margin-bottom: 1.25rem;
-      line-height: 1.75;
-      font-weight: 400;
-      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both 0.22s;
-    }
-
-    .price-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 0.35rem 1rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 2.5rem;
-      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both 0.30s;
-    }
-    .price-pill .sep { width: 1px; height: 12px; background: var(--border-mid); }
-    .price-pill strong { color: var(--text); font-weight: 500; }
-
-    .hero-actions {
-      display: flex;
-      gap: 0.875rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 4.5rem;
-      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both 0.38s;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--green);
-      color: #fff;
-      padding: 0.875rem 1.875rem;
-      border-radius: 10px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s, opacity 0.15s;
-      box-shadow: 0 1px 0 rgba(255,255,255,0.12) inset, 0 4px 24px var(--green-dim);
-    }
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.12) inset, 0 8px 32px var(--green-glow);
-      opacity: 0.95;
-    }
-    .btn-primary:active { transform: translateY(0); }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--surface);
-      color: var(--text);
-      padding: 0.875rem 1.875rem;
-      border-radius: 10px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 1rem;
-      text-decoration: none;
-      border: 1px solid var(--border-mid);
-      cursor: pointer;
-      transition: background 0.15s, border-color 0.15s;
-    }
-    .btn-secondary:hover {
-      background: var(--surface-hov);
-      border-color: rgba(255,255,255,0.18);
-    }
-
-    /* ── PHONE MOCKUP ───────────────────── */
-    .phone-wrap {
-      animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) both 0.5s;
-      position: relative;
-    }
-    .phone-wrap::after {
+    /* faint radial behind headline */
+    .hero::before {
       content: '';
       position: absolute;
-      bottom: -18px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 180px; height: 36px;
-      background: radial-gradient(ellipse, rgba(93,107,255,0.28) 0%, transparent 70%);
-      filter: blur(8px);
+      top: 0; left: -10%; right: 40%;
+      bottom: 0;
+      background: radial-gradient(ellipse 70% 60% at 35% 50%,
+        rgba(107,47,255,.10) 0%, transparent 70%);
       pointer-events: none;
     }
 
-    .phone-frame {
-      width: 268px;
-      background: var(--bg1);
-      border: 1px solid var(--border-mid);
-      border-radius: 36px;
-      padding: 13px;
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.04),
-        0 48px 96px rgba(0,0,0,0.7),
-        inset 0 1px 0 rgba(255,255,255,0.07);
-      animation: float 7s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(-10px); }
-    }
+    .hero-content { position: relative; }
 
-    .phone-screen {
-      background: #0A1E19;
-      border-radius: 24px;
-      padding: 1rem;
-      min-height: 370px;
-      overflow: hidden;
-    }
-
-    .wa-header {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      margin-bottom: 1rem;
-    }
-    .wa-avatar {
-      width: 34px; height: 34px;
-      background: var(--indigo);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 0.8rem; font-weight: 700;
-      flex-shrink: 0;
-    }
-    .wa-name { font-size: 0.82rem; font-weight: 600; color: var(--text); }
-    .wa-status { font-size: 0.68rem; color: var(--green); }
-
-    .wa-msg {
-      background: rgba(255,255,255,0.07);
-      border-radius: 10px 10px 10px 3px;
-      padding: 0.55rem 0.75rem;
-      font-size: 0.75rem;
-      margin-bottom: 0.45rem;
-      max-width: 88%;
-      line-height: 1.5;
-      color: rgba(255,255,255,0.85);
-    }
-    .wa-msg.sent {
-      background: #1A4832;
-      margin-left: auto;
-      border-radius: 10px 10px 3px 10px;
-    }
-    .wa-msg .time {
-      font-size: 0.62rem;
-      color: rgba(255,255,255,0.3);
-      text-align: right;
-      margin-top: 0.2rem;
-    }
-
-    /* ── DIVIDER ────────────────────────── */
-    .section-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border-mid) 30%, var(--border-mid) 70%, transparent);
-      margin: 0;
-    }
-
-    /* ── SECTIONS ───────────────────────── */
-    section { padding: 6rem 1.5rem; }
-
-    .section-eyebrow {
-      display: block;
-      text-align: center;
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: .45rem;
       font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+      font-size: .68rem; font-weight: 500; letter-spacing: .1em;
+      color: var(--m-dark);
+      border: 1px solid var(--bd);
+      padding: .28rem .75rem; border-radius: 4px;
+      margin-bottom: 1.75rem;
       text-transform: uppercase;
-      color: var(--indigo-light);
-      margin-bottom: 1rem;
+    }
+    .tag-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--green);
+      animation: blink 2.4s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%,100% { opacity:1; } 50% { opacity:.3; }
     }
 
-    h2 {
-      text-align: center;
-      font-size: clamp(1.9rem, 4.5vw, 3rem);
-      font-weight: 700;
-      letter-spacing: -0.035em;
-      margin-bottom: 0.75rem;
+    .hero-headline {
+      font-size: clamp(5rem, 10.5vw, 10rem);
+      margin-bottom: 1.75rem;
+    }
+    .hero-headline .line { display: block; }
+    .hero-headline .line-wa {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--purple-l);
     }
 
-    .section-sub {
-      text-align: center;
-      color: var(--muted);
-      font-size: 1rem;
-      max-width: 460px;
-      margin: 0 auto 4rem;
-      line-height: 1.75;
+    .hero-body {
+      font-size: 1.05rem; line-height: 1.75;
+      color: var(--m-dark); max-width: 420px;
+      margin-bottom: 2rem;
     }
 
-    /* ── STEPS ──────────────────────────── */
-    .steps {
+    .hero-meta {
+      display: flex; align-items: center; gap: 1.5rem;
+      margin-bottom: 2rem; flex-wrap: wrap;
+    }
+    .meta-stat {
+      display: flex; flex-direction: column; gap: .1rem;
+    }
+    .meta-val {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.35rem; font-weight: 500; color: var(--t-dark);
+      letter-spacing: -.02em;
+    }
+    .meta-lbl {
+      font-size: .72rem; color: var(--m-dark);
+      font-family: 'DM Mono', monospace; letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .meta-sep { width: 1px; height: 36px; background: var(--bd); }
+
+    .hero-actions { display:flex; gap:.875rem; flex-wrap:wrap; }
+
+    .btn-p {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--green); color: #fff;
+      padding: .875rem 1.875rem; border-radius: 10px;
+      font-family:'DM Sans',sans-serif; font-weight:700; font-size:1rem;
+      text-decoration:none; border:none; cursor:pointer;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 24px var(--green-g);
+    }
+    .btn-p:hover { transform:translateY(-1px); box-shadow:0 8px 36px var(--green-g); }
+
+    .btn-s {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(255,255,255,.05); color: var(--t-dark);
+      padding: .875rem 1.875rem; border-radius: 10px;
+      font-family:'DM Sans',sans-serif; font-weight:500; font-size:1rem;
+      text-decoration:none; border:1px solid var(--bd); cursor:pointer;
+      transition: background .15s, border-color .15s;
+    }
+    .btn-s:hover { background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.15); }
+
+    /* ── PHONE ───────────────────────────── */
+    .phone-col { position:relative; flex-shrink:0; }
+    .phone-col::after {
+      content:''; position:absolute;
+      bottom:-24px; left:50%; transform:translateX(-50%);
+      width:160px; height:32px;
+      background:radial-gradient(ellipse, rgba(107,47,255,.35) 0%, transparent 70%);
+      filter:blur(8px); pointer-events:none;
+    }
+    .phone-frame {
+      width: 256px;
+      background: #0D0D0D;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 36px;
+      padding: 12px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.07),
+        0 48px 96px rgba(0,0,0,.7);
+      animation: levitate 6.5s ease-in-out infinite;
+    }
+    @keyframes levitate {
+      0%,100% { transform:translateY(0); }
+      50%      { transform:translateY(-10px); }
+    }
+    .phone-screen {
+      background: #0A1E19; border-radius: 25px;
+      padding: .95rem; min-height: 360px;
+    }
+    .wa-hdr {
+      display:flex; align-items:center; gap:.45rem;
+      padding-bottom:.7rem; border-bottom:1px solid rgba(255,255,255,.06);
+      margin-bottom:.9rem;
+    }
+    .wa-av {
+      width:32px; height:32px; border-radius:50%;
+      background:var(--purple); flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      font-family:'DM Mono',monospace; font-size:.75rem; font-weight:500;
+    }
+    .wa-nm { font-size:.8rem; font-weight:600; }
+    .wa-st { font-size:.65rem; color:var(--green); }
+    .wa-b {
+      background:rgba(255,255,255,.07);
+      border-radius:9px 9px 9px 3px;
+      padding:.5rem .7rem; font-size:.72rem;
+      margin-bottom:.4rem; max-width:88%;
+      line-height:1.5; color:rgba(255,255,255,.8);
+    }
+    .wa-b.s { background:#1A4832; margin-left:auto; border-radius:9px 9px 3px 9px; }
+    .wa-t { font-size:.6rem; color:rgba(255,255,255,.28); text-align:right; margin-top:.18rem; }
+
+    /* ── MARQUEE ─────────────────────────── */
+    .marquee-outer {
+      border-top: 1px solid var(--bd);
+      border-bottom: 1px solid var(--bd);
+      background: rgba(107,47,255,.08);
+      overflow: hidden;
+      padding: .9rem 0;
+      width: 100%;
+    }
+    .marquee-track {
+      display: flex; gap: 0; white-space: nowrap;
+      animation: scroll 22s linear infinite;
+      width: max-content;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee-item {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--m-dark);
+      padding: 0 2rem;
+    }
+    .marquee-item.hl { color: var(--purple-l); }
+
+    /* ── SECTION SHARED ──────────────────── */
+    .sec { padding: 7rem 5vw; position:relative; }
+    .sec-dark { background: var(--black); }
+    .sec-light { background: var(--white); color: var(--t-light); }
+    .sec-dark2 { background: var(--black2); }
+
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: .65rem; font-weight: 500;
+      letter-spacing: .16em; text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .eyebrow-dark { color: var(--purple-l); }
+    .eyebrow-light { color: var(--purple); }
+
+    .sec-inner { max-width: 1200px; margin: 0 auto; }
+
+    /* ── COMO FUNCIONA (LIGHT) ───────────── */
+    .steps-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+    }
+    .steps-title {
+      font-size: clamp(4rem, 8vw, 7.5rem);
+      color: var(--t-light);
+    }
+    .steps-sub {
+      max-width: 320px;
+      font-size: .95rem;
+      color: var(--m-light);
+      line-height: 1.7;
+      padding-bottom: .4rem;
+    }
+
+    .steps-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      max-width: 900px;
-      margin: 0 auto;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .step {
-      background: var(--bg1);
-      padding: 2.25rem 2rem;
-      transition: background 0.2s;
-      position: relative;
-    }
-    .step:hover { background: var(--bg2); }
-
-    .step-num {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      font-weight: 500;
-      color: var(--subtle);
-      letter-spacing: 0.1em;
-      margin-bottom: 1.5rem;
-    }
-
-    .step-icon-wrap {
-      width: 40px; height: 40px;
-      border: 1px solid var(--border-mid);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.25rem;
-      background: var(--surface);
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .step:hover .step-icon-wrap {
-      border-color: var(--border-ind);
-      background: var(--indigo-dim);
-    }
-    .step-icon-wrap svg {
-      width: 20px; height: 20px;
-      stroke: var(--muted);
-      stroke-width: 1.5;
-      fill: none;
-      transition: stroke 0.2s;
-    }
-    .step:hover .step-icon-wrap svg { stroke: var(--indigo-light); }
-
-    .step h3 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .step p {
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    /* scroll-driven reveal for steps */
-    @supports (animation-timeline: view()) {
-      .step {
-        animation: fadeUp linear both;
-        animation-timeline: view();
-        animation-range: entry 5% entry 35%;
-      }
-    }
-
-    /* ── LOCATIONS ──────────────────────── */
-    .locations { background: var(--bg1); }
-
-    .locations-inner {
-      max-width: 640px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .locations-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.6rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .location-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.4rem 0.875rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--muted);
-      transition: border-color 0.15s, color 0.15s, background 0.15s;
-      cursor: default;
-    }
-    .location-chip:hover {
-      border-color: var(--border-ind);
-      color: var(--text);
-      background: var(--indigo-dim);
-    }
-
-    .location-note {
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-
-    /* ── PRICING ────────────────────────── */
-    .pricing-cards {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      max-width: 380px;
-      margin: 0 auto;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .price-card {
-      background: var(--bg1);
-      padding: 2rem 1.75rem;
-      text-align: center;
-      transition: background 0.2s;
-      position: relative;
-    }
-    .price-card:hover { background: var(--bg2); }
-
-    .price-card.featured {
-      background: var(--indigo-dim);
-    }
-    .price-card.featured:hover {
-      background: rgba(93,107,255,0.18);
-    }
-
-    .price-card.featured::after {
-      content: 'POPULAR';
-      position: absolute;
-      top: 0.75rem; right: 0.75rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.55rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      color: var(--indigo-light);
-      background: var(--indigo-dim);
-      border: 1px solid var(--border-ind);
-      padding: 0.2rem 0.45rem;
-      border-radius: 4px;
-    }
-
-    .price-type {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      font-weight: 500;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.75rem;
-    }
-    .price-amount {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 3rem;
-      font-weight: 800;
-      letter-spacing: -0.05em;
-      line-height: 1;
-      color: var(--text);
-    }
-    .price-unit {
-      font-size: 0.75rem;
-      color: var(--subtle);
-      margin-top: 0.35rem;
-      font-family: 'DM Mono', monospace;
-    }
-
-    .pricing-note {
-      text-align: center;
-      color: var(--subtle);
-      font-size: 0.8rem;
-      margin-top: 1.5rem;
-      font-family: 'DM Mono', monospace;
-      letter-spacing: 0.01em;
-    }
-
-    /* ── FAQ ────────────────────────────── */
-    .faq { background: var(--bg1); }
-
-    .faq-list {
-      max-width: 660px;
-      margin: 0 auto;
-      border: 1px solid var(--border);
+      border: 1px solid var(--bl);
       border-radius: 16px;
       overflow: hidden;
     }
-
-    details {
-      border-bottom: 1px solid var(--border);
-      overflow: hidden;
-      transition: background 0.15s;
+    .step {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--bl);
+      transition: background .2s;
     }
-    details:last-child { border-bottom: none; }
-    details[open] { background: var(--surface); }
+    .step:last-child { border-right: none; }
+    .step:hover { background: rgba(107,47,255,.04); }
 
+    .sn {
+      font-family: 'DM Mono', monospace;
+      font-size: .62rem; letter-spacing: .12em;
+      color: var(--m-light); margin-bottom: 1.5rem;
+    }
+    .si {
+      width: 40px; height: 40px;
+      border: 1px solid var(--bl);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+      transition: border-color .2s, background .2s;
+    }
+    .step:hover .si { border-color: rgba(107,47,255,.35); background: rgba(107,47,255,.07); }
+    .si svg { width:20px; height:20px; stroke:var(--m-light); stroke-width:1.5; fill:none; transition:stroke .2s; }
+    .step:hover .si svg { stroke: var(--purple); }
+
+    .step h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.35rem;
+      text-transform: uppercase; letter-spacing: .02em;
+      color: var(--t-light); margin-bottom: .5rem;
+    }
+    .step p { font-size: .875rem; color: var(--m-light); line-height: 1.65; }
+
+    /* ── LOCATIONS (DARK) ────────────────── */
+    .loc-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 3.5rem;
+    }
+    .loc-title { font-size: clamp(3.5rem, 7vw, 6.5rem); }
+    .loc-right {
+      display: flex; flex-direction: column;
+      justify-content: flex-end; gap: 1.5rem; padding-bottom: .3rem;
+    }
+    .loc-desc { font-size: .95rem; color: var(--m-dark); line-height: 1.7; max-width: 380px; }
+
+    .chips {
+      display: flex; flex-wrap: wrap; gap: .5rem;
+      border-top: 1px solid var(--bd);
+      padding-top: 2.5rem;
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: .35rem;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--bd);
+      border-radius: 6px;
+      padding: .45rem .875rem;
+      font-size: .875rem; font-weight: 500;
+      color: var(--m-dark);
+      transition: border-color .15s, color .15s, background .15s;
+      cursor: default;
+    }
+    .chip:hover { border-color:rgba(107,47,255,.4); color:var(--t-dark); background:var(--purple-d); }
+
+    /* ── PRICING (LIGHT) ─────────────────── */
+    .pricing-head {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; gap: 2rem;
+      margin-bottom: 3.5rem; flex-wrap: wrap;
+    }
+    .pricing-title { font-size: clamp(3.5rem, 7vw, 6.5rem); color: var(--t-light); }
+    .pricing-note-head {
+      font-size: .875rem; color: var(--m-light);
+      max-width: 280px; line-height: 1.7;
+      padding-bottom: .3rem;
+    }
+
+    .pricing-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--bl);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .pc {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid var(--bl);
+      position: relative;
+      transition: background .2s;
+    }
+    .pc:last-child { border-right: none; }
+    .pc:hover { background: rgba(107,47,255,.05); }
+    .pc-featured { background: rgba(107,47,255,.06); }
+    .pc-featured:hover { background: rgba(107,47,255,.10); }
+
+    .pc-badge {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: .58rem; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--purple);
+      border: 1px solid rgba(107,47,255,.3);
+      background: rgba(107,47,255,.08);
+      padding: .18rem .5rem; border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+
+    .pc-type {
+      font-family: 'DM Mono', monospace;
+      font-size: .65rem; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--m-light);
+      margin-bottom: .75rem;
+    }
+    .pc-amount {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 7rem;
+      line-height: 1; letter-spacing: -.03em;
+      color: var(--t-light);
+    }
+    .pc-unit {
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem; color: var(--m-light);
+      margin-top: .5rem; letter-spacing: .06em;
+    }
+
+    .pricing-footer {
+      margin-top: 1.5rem;
+      display: flex; align-items: center; gap: .75rem;
+      flex-wrap: wrap;
+    }
+    .pf-item {
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem; color: var(--m-light);
+      display: flex; align-items: center; gap: .35rem;
+    }
+    .pf-item::before {
+      content: '✓'; color: var(--green);
+      font-size: .8rem; font-weight: 700;
+    }
+    .pf-sep { color: var(--bl); font-size: .9rem; }
+
+    /* ── FAQ (DARK) ──────────────────────── */
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .faq-left { position: sticky; top: 7rem; }
+    .faq-title { font-size: clamp(3rem, 6vw, 5.5rem); margin-bottom: 1.5rem; }
+    .faq-desc { font-size: .9rem; color: var(--m-dark); line-height: 1.75; margin-bottom: 2rem; }
+
+    .faq-list { display: flex; flex-direction: column; }
+    details {
+      border-bottom: 1px solid var(--bd);
+      overflow: hidden;
+    }
+    details:first-child { border-top: 1px solid var(--bd); }
     summary {
-      padding: 1.2rem 1.5rem;
-      font-weight: 600;
-      font-size: 0.925rem;
-      cursor: pointer;
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      user-select: none;
-      color: var(--text);
-      transition: color 0.15s;
+      padding: 1.25rem 0;
+      font-weight: 600; font-size: .925rem;
+      cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+      user-select: none; color: var(--t-dark);
+      transition: color .15s;
     }
     summary::-webkit-details-marker { display: none; }
-
-    .faq-icon {
-      width: 20px; height: 20px;
-      border: 1px solid var(--border-mid);
-      border-radius: 6px;
+    .fq-icon {
+      width: 22px; height: 22px;
+      border: 1px solid var(--bd); border-radius: 6px;
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      margin-left: 1rem;
-      transition: border-color 0.15s, background 0.15s, transform 0.2s;
+      flex-shrink: 0; margin-left: 1rem;
+      transition: transform .2s, border-color .2s, background .2s;
     }
-    .faq-icon::after {
-      content: '+';
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1;
-      transition: color 0.15s, transform 0.2s;
+    .fq-icon::after {
+      content: '+'; font-size: .9rem;
+      color: var(--m-dark); line-height: 1;
+      transition: color .2s;
     }
-
-    details[open] .faq-icon {
-      border-color: var(--border-ind);
-      background: var(--indigo-dim);
+    details[open] .fq-icon {
       transform: rotate(45deg);
+      border-color: rgba(107,47,255,.4);
+      background: var(--purple-d);
     }
-    details[open] .faq-icon::after { color: var(--indigo-light); }
-
+    details[open] .fq-icon::after { color: var(--purple-l); }
     details p {
-      padding: 0 1.5rem 1.25rem;
-      color: var(--muted);
-      font-size: 0.875rem;
-      line-height: 1.75;
+      padding: 0 0 1.25rem;
+      color: var(--m-dark); font-size: .875rem; line-height: 1.75;
     }
 
-    /* ── CTA FINAL ──────────────────────── */
-    .cta-section {
+    /* ── CTA FINAL ───────────────────────── */
+    .cta-sec {
+      background: var(--white);
+      padding: 8rem 5vw;
       text-align: center;
-      padding: 8rem 1.5rem;
       position: relative;
       overflow: hidden;
     }
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 700px; height: 500px;
-      background: radial-gradient(ellipse, rgba(93,107,255,0.1) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .cta-section h2 {
-      font-size: clamp(2rem, 5vw, 3.75rem);
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-    .gradient-text {
-      background: linear-gradient(135deg, var(--indigo-light) 10%, #25D366 90%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .cta-section p {
-      color: var(--muted);
-      margin-bottom: 2.5rem;
-      font-size: 1rem;
-      max-width: 380px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.75;
-    }
-    .cta-section .btn-primary {
-      font-size: 1.05rem;
-      padding: 1rem 2rem;
-    }
-
-    /* ── FOOTER ─────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 1.75rem 2rem;
-    }
-
-    .footer-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-copy {
+    .cta-label {
       font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--subtle);
+      font-size: .65rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--purple);
+      margin-bottom: 1.25rem; display: block;
+    }
+    .cta-title {
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      color: var(--t-light);
+      margin-bottom: 1.5rem;
+    }
+    .cta-title .stroke {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--purple);
+    }
+    .cta-sub {
+      font-size: 1rem; color: var(--m-light); line-height: 1.75;
+      max-width: 380px; margin: 0 auto 2.5rem;
+    }
+    .cta-sec .btn-p { font-size: 1.05rem; padding: 1rem 2.25rem; }
+
+    /* ── FOOTER ──────────────────────────── */
+    footer {
+      border-top: 1px solid var(--bd);
+      padding: 1.75rem 2rem;
+      background: var(--black);
+    }
+    .ft {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .ft-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem; color: rgba(255,255,255,.28);
+    }
+    .ft-links { display: flex; gap: 1.5rem; }
+    .ft-links a {
+      font-size: .82rem; color: var(--m-dark);
+      text-decoration: none; transition: color .15s;
+    }
+    .ft-links a:hover { color: var(--t-dark); }
+
+    /* ── DIVIDER LINE ────────────────────── */
+    .rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--bd) 30%, var(--bd) 70%, transparent);
     }
 
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-    .footer-links a {
-      font-size: 0.82rem;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    .footer-links a:hover { color: var(--text); }
-
-    /* ── INLINE SECONDARY ───────────────── */
-    .btn-secondary-inline {
-      display: inline-flex;
-      margin: 0 auto;
+    /* ── RESPONSIVE ──────────────────────── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 3rem; padding: 8rem 6vw 4rem; }
+      .phone-col { display: flex; justify-content: center; }
+      .loc-head { grid-template-columns: 1fr; gap: 1.5rem; }
+      .faq-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .faq-left { position: static; }
+      .pricing-row { grid-template-columns: 1fr; }
+      .pc { border-right: none; border-bottom: 1px solid var(--bl); }
+      .pc:last-child { border-bottom: none; }
+      .steps-head { flex-direction: column; align-items: flex-start; }
     }
 
-    /* ── SCROLL ANIMATIONS ──────────────── */
-    @supports (animation-timeline: view()) {
-      .step, .price-card, details, .location-chip {
-        animation: fadeUp linear both;
-        animation-timeline: view();
-        animation-range: entry 5% entry 35%;
-      }
-    }
-
-    /* ── RESPONSIVE ─────────────────────── */
-    @media (max-width: 760px) {
-      nav { padding: 0.8rem 1.25rem; }
-      .nav-links { display: none; }
-
-      .hero { padding-top: 6rem; padding-bottom: 4rem; }
-      .hero-actions { flex-direction: column; align-items: stretch; }
-      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
-
-      .steps {
-        grid-template-columns: 1fr;
-        max-width: 420px;
-      }
-      .step { padding: 1.75rem 1.5rem; }
-
-      .pricing-cards {
-        grid-template-columns: 1fr 1fr;
-        max-width: 320px;
-      }
-
-      .footer-inner { flex-direction: column; text-align: center; }
-      .footer-links { justify-content: center; }
-    }
-
-    @media (max-width: 420px) {
-      .pricing-cards { grid-template-columns: 1fr; max-width: 240px; }
+    @media (max-width: 640px) {
+      nav { padding: .8rem 1.25rem; }
+      .nav-mid { display: none; }
+      .hero-actions { flex-direction: column; }
+      .btn-p, .btn-s { width: 100%; justify-content: center; }
+      .steps-grid { grid-template-columns: 1fr; border-radius: 12px; }
+      .step { border-right: none; border-bottom: 1px solid var(--bl); }
+      .step:last-child { border-bottom: none; }
+      .pricing-head { flex-direction: column; align-items: flex-start; }
+      .hero-meta { gap: 1rem; }
     }
   </style>
 </head>
 <body>
 
-<div class="noise" aria-hidden="true"></div>
-
 <!-- NAV -->
 <nav>
   <a href="#" class="logo">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 44" height="26" aria-label="Printo">
-      <text x="0" y="36" font-family="'Bricolage Grotesque','Space Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="40" letter-spacing="-2" fill="#7B6FE8">Print</text>
-      <text x="101" y="36" font-family="'Bricolage Grotesque','Space Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="40" letter-spacing="-2" fill="none" stroke="#DDDAF5" stroke-width="3">o</text>
-      <circle cx="60" cy="3" r="4" fill="#7B6FE8"/>
+      <text x="0" y="36" font-family="'Barlow Condensed','Helvetica Neue',sans-serif" font-weight="900" font-size="40" letter-spacing="-1" fill="#7B6FE8">PRINT</text>
+      <text x="104" y="36" font-family="'Barlow Condensed','Helvetica Neue',sans-serif" font-weight="900" font-size="40" letter-spacing="-1" fill="none" stroke="#DDDAF5" stroke-width="3">O</text>
+      <circle cx="60" cy="4" r="4" fill="#7B6FE8"/>
     </svg>
   </a>
-
-  <ul class="nav-links" role="list">
+  <ul class="nav-mid" role="list">
     <li><a href="#como-funciona">Cómo funciona</a></li>
     <li><a href="#precios">Precios</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
-
   <a href="https://wa.me/50256373592?text=Hola%2C+quiero+imprimir" class="nav-cta">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     Imprimir ahora
@@ -850,233 +624,244 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-mesh" aria-hidden="true"></div>
+<div style="background:var(--black); padding-top:72px;">
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="tag-dot"></span>
+        🇬🇹 Disponible en Guatemala
+      </div>
 
-  <div class="hero-badge">
-    <span class="badge-dot"></span>
-    🇬🇹 Disponible en Guatemala
-  </div>
+      <h1 class="disp hero-headline">
+        <span class="line">Imprime</span>
+        <span class="line">desde</span>
+        <span class="line line-wa">WhatsApp</span>
+        <span class="line">en minutos</span>
+      </h1>
 
-  <h1>
-    <span class="h1-line">Imprime desde</span>
-    <span class="h1-line h1-accent">WhatsApp</span>
-    <span class="h1-line">en minutos</span>
-  </h1>
+      <p class="hero-body">
+        Manda tu PDF por WhatsApp, elige opciones y escanea el QR de la impresora más cercana. Sin apps, sin cuentas, sin fila.
+      </p>
 
-  <p class="hero-sub">
-    Manda tu PDF por WhatsApp, elige opciones y escanea el QR de la impresora más cercana. Sin apps, sin cuentas, sin fila.
-  </p>
+      <div class="hero-meta">
+        <div class="meta-stat">
+          <span class="meta-val">Q2</span>
+          <span class="meta-lbl">B&amp;N / página</span>
+        </div>
+        <div class="meta-sep"></div>
+        <div class="meta-stat">
+          <span class="meta-val">Q5</span>
+          <span class="meta-lbl">Color / página</span>
+        </div>
+        <div class="meta-sep"></div>
+        <div class="meta-stat">
+          <span class="meta-val">3</span>
+          <span class="meta-lbl">Pasos y listo</span>
+        </div>
+      </div>
 
-  <div class="price-pill">
-    <span>B&amp;N <strong>Q2</strong>/página</span>
-    <span class="sep"></span>
-    <span>Color <strong>Q5</strong>/página</span>
-  </div>
+      <div class="hero-actions">
+        <a href="https://wa.me/50256373592?text=Hola%2C+quiero+imprimir" class="btn-p">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Imprimir por WhatsApp
+        </a>
+        <a href="#como-funciona" class="btn-s">Ver cómo funciona ↓</a>
+      </div>
+    </div>
 
-  <div class="hero-actions">
-    <a href="https://wa.me/50256373592?text=Hola%2C+quiero+imprimir" class="btn-primary">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Imprimir por WhatsApp
-    </a>
-    <a href="#como-funciona" class="btn-secondary">
-      Ver cómo funciona ↓
-    </a>
-  </div>
-
-  <!-- Phone Mockup -->
-  <div class="phone-wrap">
-    <div class="phone-frame">
-      <div class="phone-screen">
-        <div class="wa-header">
-          <div class="wa-avatar">P</div>
-          <div>
-            <div class="wa-name">Printo</div>
-            <div class="wa-status">en línea</div>
+    <!-- Phone -->
+    <div class="phone-col">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="wa-hdr">
+            <div class="wa-av">P</div>
+            <div>
+              <div class="wa-nm">Printo</div>
+              <div class="wa-st">en línea</div>
+            </div>
           </div>
+          <div class="wa-b">👋 ¡Hola! Mándame tu PDF y te digo cuánto cuesta.<div class="wa-t">9:01</div></div>
+          <div class="wa-b s">[tarea.pdf]<div class="wa-t">9:02 ✓✓</div></div>
+          <div class="wa-b">📄 Tu archivo tiene <b>3 páginas</b>.<br/><br/>1️⃣ B&amp;N — Q6.00<br/>2️⃣ Color — Q15.00<div class="wa-t">9:02</div></div>
+          <div class="wa-b s">1<div class="wa-t">9:02 ✓✓</div></div>
+          <div class="wa-b">✅ ¡Listo! Escanea el QR de la impresora para imprimir.<div class="wa-t">9:03</div></div>
         </div>
-        <div class="wa-msg">
-          👋 ¡Hola! Mándame tu PDF y te digo cuánto cuesta.
-          <div class="time">9:01</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-outer">
+  <div class="marquee-track" aria-hidden="true">
+    <span class="marquee-item">Sin apps</span>
+    <span class="marquee-item hl">·</span>
+    <span class="marquee-item">Sin filas</span>
+    <span class="marquee-item hl">·</span>
+    <span class="marquee-item">Sin cuentas</span>
+    <span class="marquee-item hl">·</span>
+    <span class="marquee-item">Solo WhatsApp</span>
+    <span class="marquee-item hl">·</span>
+    <span class="marquee-item">Desde Q2</span>
+    <span class="marquee-item hl">·</span>
+    <span class="marquee-item">Guatemala</span>
+    <span class="marquee-item hl">·</span>
+    <span class="marquee-item">Sin apps</span>
+    <span class="marquee-item hl">·</span>
+    <span class="marquee-item">Sin filas</span>
+    <span class="marquee-item hl">·</span>
+    <span class="marquee-item">Sin cuentas</span>
+    <span class="marquee-item hl">·</span>
+    <span class="marquee-item">Solo WhatsApp</span>
+    <span class="marquee-item hl">·</span>
+    <span class="marquee-item">Desde Q2</span>
+    <span class="marquee-item hl">·</span>
+    <span class="marquee-item">Guatemala</span>
+    <span class="marquee-item hl">·</span>
+  </div>
+</div>
+
+<!-- COMO FUNCIONA (light) -->
+<section id="como-funciona" class="sec sec-light">
+  <div class="sec-inner">
+    <p class="eyebrow eyebrow-light">Cómo funciona</p>
+    <div class="steps-head">
+      <h2 class="disp steps-title">3 Pasos<br/>y listo.</h2>
+      <p class="steps-sub">Sin descargar apps. Sin registrarte. Solo WhatsApp y tu documento.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="sn">PASO 01</div>
+        <div class="si">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14 2 14 8 20 8" stroke-linecap="round" stroke-linejoin="round"/><line x1="9" y1="13" x2="15" y2="13" stroke-linecap="round"/><line x1="9" y1="17" x2="13" y2="17" stroke-linecap="round"/></svg>
         </div>
-        <div class="wa-msg sent">
-          [tarea.pdf]
-          <div class="time">9:02 ✓✓</div>
+        <h3>Manda tu PDF</h3>
+        <p>Envía tu archivo a Printo por WhatsApp. El bot te confirma las páginas y te da el costo al instante.</p>
+      </div>
+      <div class="step">
+        <div class="sn">PASO 02</div>
+        <div class="si">
+          <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="2" y1="10" x2="22" y2="10" stroke-linecap="round"/><line x1="6" y1="15" x2="10" y2="15" stroke-linecap="round" stroke-width="2"/></svg>
         </div>
-        <div class="wa-msg">
-          📄 Tu archivo tiene <b>3 páginas</b>.<br/><br/>
-          1️⃣ Blanco &amp; Negro — Q6.00<br/>
-          2️⃣ Color — Q15.00
-          <div class="time">9:02</div>
+        <h3>Confirma y paga</h3>
+        <p>Elige B&amp;N o color, descuenta de tu saldo Printo. Si es tu primera vez, el bot te guía para recargar en segundos.</p>
+      </div>
+      <div class="step">
+        <div class="sn">PASO 03</div>
+        <div class="si">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/></svg>
         </div>
-        <div class="wa-msg sent">
-          1
-          <div class="time">9:02 ✓✓</div>
-        </div>
-        <div class="wa-msg">
-          ✅ ¡Listo! Escanea el QR de la impresora para imprimir.
-          <div class="time">9:03</div>
-        </div>
+        <h3>Escanea y recoge</h3>
+        <p>Ve a la impresora Printo más cercana, escanea el QR y tu documento sale en segundos.</p>
       </div>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- COMO FUNCIONA -->
-<section id="como-funciona">
-  <span class="section-eyebrow">Cómo funciona</span>
-  <h2>3 pasos y listo</h2>
-  <p class="section-sub">Sin descargar apps. Sin registrarte. Solo WhatsApp.</p>
-
-  <div class="steps" style="max-width:900px;margin:0 auto;">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-icon-wrap">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-linecap="round" stroke-linejoin="round"/>
-          <polyline points="14 2 14 8 20 8" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="9" y1="13" x2="15" y2="13" stroke-linecap="round"/>
-          <line x1="9" y1="17" x2="13" y2="17" stroke-linecap="round"/>
-        </svg>
+<!-- UBICACIONES (dark) -->
+<section class="sec sec-dark2">
+  <div class="sec-inner">
+    <p class="eyebrow eyebrow-dark">Dónde encontrarnos</p>
+    <div class="loc-head">
+      <h2 class="disp loc-title">Cerca de<br/>donde estás.</h2>
+      <div class="loc-right">
+        <p class="loc-desc">¿No sabes dónde hay una? Escríbele al bot — te dice la impresora más cercana a donde estás.</p>
+        <a href="https://wa.me/50256373592?text=%C2%BFD%C3%B3nde+est%C3%A1+la+impresora+m%C3%A1s+cercana%3F" class="btn-s" style="align-self:flex-start;">
+          Encontrar impresora →
+        </a>
       </div>
-      <h3>Manda tu PDF</h3>
-      <p>Envía tu archivo a Printo por WhatsApp. El bot te confirma las páginas y te da el costo al instante.</p>
     </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-icon-wrap">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="5" width="20" height="14" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="2" y1="10" x2="22" y2="10" stroke-linecap="round"/>
-          <line x1="6" y1="15" x2="10" y2="15" stroke-linecap="round" stroke-width="2"/>
-        </svg>
+    <div class="chips">
+      <span class="chip">🎓 Universidades</span>
+      <span class="chip">☕ Cafés</span>
+      <span class="chip">⛽ Gasolineras</span>
+      <span class="chip">🏬 Centros comerciales</span>
+      <span class="chip">🏢 Oficinas</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS (light) -->
+<section id="precios" class="sec sec-light">
+  <div class="sec-inner">
+    <p class="eyebrow eyebrow-light">Precios</p>
+    <div class="pricing-head">
+      <h2 class="disp pricing-title">Claro y sin<br/>sorpresas.</h2>
+      <p class="pricing-note-head">Pagas exactamente por lo que imprimes. Nada más.</p>
+    </div>
+    <div class="pricing-row">
+      <div class="pc pc-featured">
+        <div class="pc-badge">más popular</div>
+        <div class="pc-type">Blanco &amp; Negro</div>
+        <div class="pc-amount">Q2</div>
+        <div class="pc-unit">por página</div>
       </div>
-      <h3>Confirma y paga</h3>
-      <p>Elige B&amp;N o color, descuenta de tu saldo Printo. Si es tu primera vez, el bot te guía para recargar en segundos.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-icon-wrap">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="11" width="18" height="11" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/>
-        </svg>
+      <div class="pc">
+        <div class="pc-type">Color</div>
+        <div class="pc-amount">Q5</div>
+        <div class="pc-unit">por página</div>
       </div>
-      <h3>Escanea y recoge</h3>
-      <p>Ve a la impresora Printo más cercana, escanea el QR y tu documento sale en segundos.</p>
+    </div>
+    <div class="pricing-footer">
+      <span class="pf-item">Sin costo de envío</span>
+      <span class="pf-sep">·</span>
+      <span class="pf-item">Sin suscripción</span>
+      <span class="pf-sep">·</span>
+      <span class="pf-item">Sin mínimo de páginas</span>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- UBICACIONES -->
-<section class="locations">
-  <span class="section-eyebrow">Dónde encontrarnos</span>
-  <h2>Cerca de donde estás</h2>
-
-  <div class="locations-inner">
-    <div class="locations-grid">
-      <span class="location-chip">🎓 Universidades</span>
-      <span class="location-chip">☕ Cafés</span>
-      <span class="location-chip">⛽ Gasolineras</span>
-      <span class="location-chip">🏬 Centros comerciales</span>
-      <span class="location-chip">🏢 Oficinas</span>
+<!-- FAQ (dark) -->
+<section id="faq" class="sec sec-dark">
+  <div class="sec-inner">
+    <div class="faq-layout">
+      <div class="faq-left">
+        <p class="eyebrow eyebrow-dark">FAQ</p>
+        <h2 class="disp faq-title">¿Tienes<br/>dudas?</h2>
+        <p class="faq-desc">Todo lo que necesitas saber antes de imprimir tu primer documento.</p>
+        <a href="https://wa.me/50256373592?text=Hola%2C+tengo+una+pregunta" class="btn-s" style="display:inline-flex;">
+          Pregúntale al bot →
+        </a>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>¿Necesito descargar una app? <span class="fq-icon" aria-hidden="true"></span></summary>
+          <p>No. Todo funciona por WhatsApp, que ya tienes en tu celular. No hay nada que instalar ni cuenta que crear.</p>
+        </details>
+        <details>
+          <summary>¿Qué formatos puedo enviar? <span class="fq-icon" aria-hidden="true"></span></summary>
+          <p>Por ahora aceptamos PDF. Próximamente Word, Excel y fotos.</p>
+        </details>
+        <details>
+          <summary>¿Cómo recargo mi saldo? <span class="fq-icon" aria-hidden="true"></span></summary>
+          <p>Directo desde el chat de WhatsApp — con tarjeta de crédito/débito o transferencia bancaria. Sin salir de la app.</p>
+        </details>
+        <details>
+          <summary>¿Mis documentos son privados? <span class="fq-icon" aria-hidden="true"></span></summary>
+          <p>Sí. Tu archivo se borra automáticamente de nuestros servidores en cuanto se imprime. Nunca guardamos tu contenido.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa si la impresora falla? <span class="fq-icon" aria-hidden="true"></span></summary>
+          <p>Tu trabajo queda guardado y puedes escanearlo en otra impresora Printo cercana. Si hay un problema técnico, te devolvemos el saldo automáticamente.</p>
+        </details>
+        <details>
+          <summary>¿Dónde hay impresoras Printo? <span class="fq-icon" aria-hidden="true"></span></summary>
+          <p>Estamos en universidades, cafés, gasolineras y centros comerciales de Guatemala. Escríbele al bot y te dice la más cercana a donde estás.</p>
+        </details>
+      </div>
     </div>
-    <p class="location-note">¿No sabes dónde hay una? Pregúntale al bot — te dice la más cercana.</p>
-    <a href="https://wa.me/50256373592?text=%C2%BFD%C3%B3nde+est%C3%A1+la+impresora+m%C3%A1s+cercana%3F" class="btn-secondary btn-secondary-inline">
-      Encontrar impresora →
-    </a>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- PRECIOS -->
-<section id="precios">
-  <span class="section-eyebrow">Precios</span>
-  <h2>Claro y sin sorpresas</h2>
-  <p class="section-sub">Pagas exactamente por lo que imprimes.</p>
-
-  <div class="pricing-cards">
-    <div class="price-card featured">
-      <div class="price-type">Blanco &amp; Negro</div>
-      <div class="price-amount">Q2</div>
-      <div class="price-unit">por página</div>
-    </div>
-    <div class="price-card">
-      <div class="price-type">Color</div>
-      <div class="price-amount">Q5</div>
-      <div class="price-unit">por página</div>
-    </div>
-  </div>
-  <p class="pricing-note">sin envío · sin suscripción · sin mínimo de páginas</p>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- FAQ -->
-<section id="faq" class="faq">
-  <span class="section-eyebrow">Preguntas frecuentes</span>
-  <h2>¿Tienes dudas?</h2>
-  <p class="section-sub" style="margin-bottom:2.5rem;">Todo lo que necesitas saber antes de imprimir.</p>
-
-  <div class="faq-list">
-    <details>
-      <summary>
-        ¿Necesito descargar una app?
-        <span class="faq-icon" aria-hidden="true"></span>
-      </summary>
-      <p>No. Todo funciona por WhatsApp, que ya tienes en tu celular. No hay nada que instalar ni cuenta que crear.</p>
-    </details>
-    <details>
-      <summary>
-        ¿Qué formatos puedo enviar?
-        <span class="faq-icon" aria-hidden="true"></span>
-      </summary>
-      <p>Por ahora aceptamos PDF. Próximamente Word, Excel y fotos.</p>
-    </details>
-    <details>
-      <summary>
-        ¿Cómo recargo mi saldo?
-        <span class="faq-icon" aria-hidden="true"></span>
-      </summary>
-      <p>Directo desde el chat de WhatsApp — con tarjeta de crédito/débito o transferencia bancaria. Sin salir de la app.</p>
-    </details>
-    <details>
-      <summary>
-        ¿Mis documentos son privados?
-        <span class="faq-icon" aria-hidden="true"></span>
-      </summary>
-      <p>Sí. Tu archivo se borra automáticamente de nuestros servidores en cuanto se imprime. Nunca guardamos tu contenido.</p>
-    </details>
-    <details>
-      <summary>
-        ¿Qué pasa si la impresora falla?
-        <span class="faq-icon" aria-hidden="true"></span>
-      </summary>
-      <p>Tu trabajo queda guardado y puedes escanearlo en otra impresora Printo cercana. Si hay un problema técnico, te devolvemos el saldo automáticamente.</p>
-    </details>
-    <details>
-      <summary>
-        ¿Dónde hay impresoras Printo?
-        <span class="faq-icon" aria-hidden="true"></span>
-      </summary>
-      <p>Estamos en universidades, cafés, gasolineras y centros comerciales de Guatemala. Escríbele al bot y te dice la más cercana a donde estás.</p>
-    </details>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- CTA FINAL -->
-<section class="cta-section">
-  <h2>¿Listo para imprimir<br /><span class="gradient-text">sin complicaciones?</span></h2>
-  <p>Es gratis empezar. Solo necesitas WhatsApp y tu documento.</p>
-  <a href="https://wa.me/50256373592?text=Hola%2C+quiero+imprimir" class="btn-primary">
+<!-- CTA FINAL (light) -->
+<section class="cta-sec">
+  <span class="cta-label">Empieza gratis</span>
+  <h2 class="disp cta-title">
+    ¿Listo para imprimir<br/><span class="stroke">sin complicaciones?</span>
+  </h2>
+  <p class="cta-sub">Es gratis empezar. Solo necesitas WhatsApp y tu documento.</p>
+  <a href="https://wa.me/50256373592?text=Hola%2C+quiero+imprimir" class="btn-p">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     Imprimir por WhatsApp
   </a>
@@ -1084,9 +869,9 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <span class="footer-copy">© 2026 Printo. Hecho en Guatemala 🇬🇹</span>
-    <div class="footer-links">
+  <div class="ft">
+    <span class="ft-copy">© 2026 Printo. Hecho en Guatemala 🇬🇹</span>
+    <div class="ft-links">
       <a href="privacy.html">Privacidad</a>
       <a href="terms.html">Términos</a>
       <a href="https://wa.me/50256373592">Contacto</a>
